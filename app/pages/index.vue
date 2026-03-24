@@ -1,0 +1,42 @@
+<template>
+  <main class="max-w-3xl">
+    <h1 class="font-bold text-display-md md:text-display-lg xl:text-display-lg">
+      Building apps, launching ideas, and chasing PRs.
+    </h1>
+    <p class="mt-3 max-w-[60ch] text-md md:text-lg text-pretty">
+      I’m Khaldoon — a software developer, entrepreneur, and amateur athlete.
+      Currently building <span class="inline-block px-1">Bites</span>, a
+      platform that turns weight loss into a shared journey by combining
+      tracking with social accountability.
+    </p>
+    <div class="flex items-center gap-4 mt-6">
+      <SocialIconButton
+        v-for="link in socialLinks"
+        :key="link.to"
+        :label="link.label"
+        :to="link.to"
+        :icon="link.icon"
+      />
+    </div>
+  </main>
+</template>
+
+<script setup lang="ts">
+  const socialLinks = [
+    {
+      to: "https://www.linkedin.com/in/khaldoon-alnuaimi-8618b7350/",
+      icon: "fa6-brands:linkedin-in",
+      label: "LinkedIn",
+    },
+    {
+      to: "https://bsky.app/profile/khaldoon.bsky.social",
+      icon: "fa6-brands:bluesky",
+      label: "Bluesky",
+    },
+    {
+      to: "https://bsky.app/profile/khaldoon.bsksssy.social",
+      icon: "fa6-brands:threads",
+      label: "Threads",
+    },
+  ];
+</script>

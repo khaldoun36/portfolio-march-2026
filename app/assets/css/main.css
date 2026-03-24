@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  /* ****************** */
+  /* *** Typography *** */
+  /* ****************** */
+
+  /* 1. Wipe default Tailwind text scale */
+  --text-*: initial;
+
+  /* 2. Untitled UI - Text Scale */
+  --text-xs: 0.75rem; /* 12px */
+  --text-xs--line-height: 1.125rem; /* 18px */
+
+  --text-sm: 0.875rem; /* 14px */
+  --text-sm--line-height: 1.25rem; /* 20px */
+
+  --text-md: 1rem; /* 16px */
+  --text-md--line-height: 1.5rem; /* 24px */
+
+  --text-lg: 1.125rem; /* 18px */
+  --text-lg--line-height: 1.75rem; /* 28px */
+
+  --text-xl: 1.25rem; /* 20px */
+  --text-xl--line-height: 1.875rem; /* 30px */
+
+  /* 3. Untitled UI - Display Scale */
+  --text-display-xs: 1.5rem; /* 24px */
+  --text-display-xs--line-height: 2rem; /* 32px */
+
+  --text-display-sm: 1.875rem; /* 30px */
+  --text-display-sm--line-height: 2.375rem; /* 38px */
+
+  --text-display-md: 2.25rem; /* 36px */
+  --text-display-md--line-height: 2.75rem; /* 44px */
+
+  --text-display-lg: 3rem; /* 48px */
+  --text-display-lg--line-height: 3.75rem; /* 60px */
+
+  --text-display-xl: 3.75rem; /* 60px */
+  --text-display-xl--line-height: 4.5rem; /* 72px */
+
+  --text-display-2xl: 4.5rem; /* 72px */
+  --text-display-2xl--line-height: 5.625rem; /* 90px */
+
+  --font-display: "CabinetGrotesk", sans-serif, ui-sans-serif;
+  --font-sans: "Montserrat", sans-serif, ui-sans-serif;
+
+  /* ****************** */
+  /* ***** Colors ***** */
+  /* ****************** */
+  --color-off-white: #f7f4ee;
+  --color-black: #06140e;
+  --color-tan: #e1dfda;
+  --color-light-green: #becac4;
+  --color-dark-green: #1d3630;
+  --color-green: #6e807a;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-dark-green);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+    color: var(--color-black);
+  }
+}
+
+@utility ds-border {
+  @apply ring-[0.75px] ring-black/20 shadow;
+}
