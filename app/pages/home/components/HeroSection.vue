@@ -1,15 +1,26 @@
 <template>
   <main class="max-w-3xl">
-    <h1 class="font-bold text-display-md md:text-display-lg xl:text-display-lg">
+    <NuxtImg
+      src="/assets/profile_picture.png"
+      class="mb-fluid-element ds-border rounded-full size-16"
+      width="736"
+      height="736"
+      alt="A portrait of me with a short beard wearing a traditional white thobe."
+    />
+
+    <h1
+      class="mb-2.5 font-bold text-display-md md:text-display-lg xl:text-display-lg"
+    >
       Building apps, launching ideas, and chasing PRs.
     </h1>
-    <p class="mt-3 max-w-[60ch] text-md md:text-lg text-pretty">
+    <p class="mb-fluid-element max-w-[60ch] text-md md:text-lg text-pretty">
       I’m Khaldoon — a software developer, entrepreneur, and amateur athlete.
       Currently building <span class="inline-block px-1">Bites</span>, a
       platform that turns weight loss into a shared journey by combining
       tracking with social accountability.
     </p>
-    <div class="flex items-center gap-4 mt-6">
+
+    <div class="flex items-center gap-4">
       <SocialIconButton
         v-for="link in socialLinks"
         :key="link.to"
@@ -21,7 +32,7 @@
   </main>
 </template>
 
-<script setup lang="ts">
+<script setup>
   const socialLinks = [
     {
       to: "https://www.linkedin.com/in/khaldoon-alnuaimi-8618b7350/",

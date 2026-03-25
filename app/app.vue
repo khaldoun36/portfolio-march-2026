@@ -13,6 +13,7 @@
   .content-grid {
     /* Grid Variables */
     --margin: 1rem;
+    --margin-calc: calc((100vw - 68rem) / 2);
     --breakout: 0px;
     --content: 1fr;
 
@@ -26,6 +27,7 @@
       [full-width-end];
     grid-template-rows: auto;
     min-height: 100dvh;
+    align-content: start;
   }
 
   /* Default to center content */

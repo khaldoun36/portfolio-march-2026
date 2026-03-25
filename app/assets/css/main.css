@@ -55,6 +55,13 @@
   --color-light-green: #becac4;
   --color-dark-green: #1d3630;
   --color-green: #6e807a;
+
+  /* ****************** */
+  /* ***** Spacing **** */
+  /* ****************** */
+  --spacing-fluid-section: clamp(4rem, 6.67vw + 1.87rem, 8rem);
+  --spacing-fluid-inner: clamp(2rem, 3.33vw + 0.93rem, 4rem);
+  --spacing-fluid-element: clamp(1rem, 1.67vw + 0.47rem, 2rem);
 }
 
 @layer base {
