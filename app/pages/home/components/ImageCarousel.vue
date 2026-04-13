@@ -1,205 +1,134 @@
 <template>
-  <section
-    class="full-width gallery"
-    ref="galleryRef"
-    @scroll.passive="syncSliderWithScroll"
-  >
-    <div class="wrapper">
-      <div
-        v-for="n in 5"
-        :key="n"
-        class="bg-red-400 rounded-lg item"
-        role="img"
-        :aria-label="`Gallery image ${n} of 5`"
-      ></div>
+  <section class="full-width gallery-section -my-1 mb-4">
+    <div class="embla" aria-label="Gallery carousel">
+      <div ref="emblaRef" class="embla__viewport">
+        <div class="embla__container py-1">
+          <NuxtImg
+            v-for="(image, index) in images"
+            :key="index"
+            class="embla__slide item ds-border"
+            :src="image.src"
+            :alt="image.alt"
+            :width="image.width ? image.width : '4096'"
+            :height="image.height ? image.height : '4096'"
+          />
+        </div>
+      </div>
     </div>
   </section>
 
-  <div class="gallery-scroll-container">
-    <input
-      type="range"
-      min="0"
-      :max="maxScroll"
-      v-model.number="currentScroll"
-      @input="syncScrollWithSlider"
-      class="w-full max-w-sm cursor-pointer custom-slider"
-      aria-label="Gallery scroll progress"
+  <div class="gallery-nav">
+    <IconButton
+      label="Previous gallery item"
+      icon="fa7-solid:angle-left"
+      @click="scrollPrev"
+      :disabled="!canScrollPrev"
+    />
+    <IconButton
+      label="Next gallery item"
+      icon="fa7-solid:angle-right"
+      @click="scrollNext"
+      :disabled="!canScrollNext"
     />
   </div>
 </template>
 
 <script setup lang="ts">
   import { ref, onMounted, onBeforeUnmount } from "vue";
+  import useEmblaCarousel from "embla-carousel-vue";
+  import IconButton from "~/components/IconButton.vue";
 
-  const galleryRef = ref<HTMLElement | null>(null);
-  const currentScroll = ref(0);
-  const maxScroll = ref(100); // Temporary initial value
-  let isDraggingSlider = false;
+  interface GalleryImage {
+    src: string;
+    width: number | string;
+    height: number | string;
+    alt: string;
+  }
 
-  // 1. Calculate total available scroll distance
-  const calculateMaxScroll = () => {
-    if (!galleryRef.value) return;
-    maxScroll.value = Math.max(
-      0,
-      galleryRef.value.scrollWidth - galleryRef.value.clientWidth,
-    );
+  defineProps<{
+    images: GalleryImage[];
+  }>();
+
+  const canScrollPrev = ref(false);
+  const canScrollNext = ref(false);
+
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "start",
+    containScroll: "trimSnaps",
+    dragFree: false,
+  });
+
+  const updateNavigation = () => {
+    if (!emblaApi.value) return;
+
+    canScrollPrev.value = emblaApi.value.canScrollPrev();
+    canScrollNext.value = emblaApi.value.canScrollNext();
   };
 
-  // 2. Update slider when user scrolls natively (swipe, trackpad)
-  const syncSliderWithScroll = () => {
-    // Prevent the scroll event from fighting the slider if the user is currently dragging it
-    if (!galleryRef.value || isDraggingSlider) return;
-    currentScroll.value = galleryRef.value.scrollLeft;
+  const scrollPrev = () => {
+    emblaApi.value?.scrollPrev();
   };
 
-  // 3. Update scroll position when user drags the slider
-  const syncScrollWithSlider = () => {
-    if (!galleryRef.value) return;
-    isDraggingSlider = true;
-
-    // Use 'auto' behavior to prevent lag while dragging
-    galleryRef.value.scrollTo({
-      left: currentScroll.value,
-      behavior: "auto",
-    });
-
-    // Release the dragging lock slightly after the drag ends
-    setTimeout(() => {
-      isDraggingSlider = false;
-    }, 50);
+  const scrollNext = () => {
+    emblaApi.value?.scrollNext();
   };
 
-  // Recalculate max scroll on mount and window resize
   onMounted(() => {
-    // Slight delay to ensure CSS Grid has painted the items fully
-    setTimeout(() => {
-      calculateMaxScroll();
-      syncSliderWithScroll();
-    }, 50);
+    if (!emblaApi.value) return;
 
-    window.addEventListener("resize", calculateMaxScroll);
+    updateNavigation();
+    emblaApi.value.on("select", updateNavigation);
+    emblaApi.value.on("reInit", updateNavigation);
   });
 
   onBeforeUnmount(() => {
-    window.removeEventListener("resize", calculateMaxScroll);
+    if (!emblaApi.value) return;
+
+    emblaApi.value.off("select", updateNavigation);
+    emblaApi.value.off("reInit", updateNavigation);
   });
 </script>
 
 <style scoped>
-  .gallery {
-    display: grid;
-    grid-template-columns: inherit;
-    overflow-x: scroll;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x proximity;
-    scrollbar-width: none;
-    scroll-padding-inline-start: calc(
-      var(--breakout) + var(--margin, var(--margin-calc))
-    );
+  .gallery-section {
+    width: 100%;
   }
 
-  @media (hover: hover) and (pointer: fine) {
-    .gallery {
-      scroll-snap-type: none;
-      margin-bottom: var(--spacing-fluid-element);
-    }
+  .embla {
+    width: 100%;
+    min-width: 0;
   }
 
-  .gallery::-webkit-scrollbar {
-    display: none;
+  .embla__viewport {
+    overflow: hidden;
+    padding-inline: var(--content-start-inset);
   }
 
-  .wrapper {
-    grid-column: content;
+  .embla__container {
     display: flex;
     gap: 1rem;
   }
 
-  .wrapper::after {
-    content: "";
-    flex: 0 0 calc(var(--breakout) + var(--margin-calc, var(--margin)));
+  .embla__slide {
+    flex: 0 0 auto;
   }
 
   .item {
-    flex-shrink: 0;
-    scroll-snap-align: start;
-    width: clamp(18rem, 16.18rem + 9.09vw, 22rem);
-    height: auto;
+    width: clamp(20rem, 16.18rem + 9.09vw, 24rem);
     aspect-ratio: 1;
+    border-radius: 0.5rem;
+    object-fit: cover; /* Ensures image maintains aspect ratio without stretching */
   }
 
-  /* Gallery scroll progress styles */
-  .gallery-scroll-container {
+  .gallery-nav {
     display: none;
   }
 
   @media (hover: hover) and (pointer: fine) {
-    .gallery-scroll-container {
+    .gallery-nav {
       display: flex;
-      justify-content: start;
+      justify-content: flex-start;
+      gap: 0.75rem;
     }
-  }
-
-  .custom-slider {
-    /* Slider Variables */
-    --track-h: 12px;
-    --track-bg: var(--color-tan);
-    --track-radius: 8px;
-
-    --thumb-size: 24px;
-    --thumb-bg: var(--color-dark-green);
-    --thumb-radius: 6px;
-    --thumb-shadow: 0 0 0 2px var(--color-black);
-
-    /* Automatically calculate center offset for WebKit */
-    --thumb-offset: calc((var(--track-h) - var(--thumb-size)) / 2);
-
-    /* 1. Remove default browser appearance */
-    -webkit-appearance: none;
-    appearance: none;
-    background: transparent;
-  }
-
-  /* 2. Style the Track */
-  .custom-slider::-webkit-slider-runnable-track {
-    height: var(--track-h);
-    background: var(--track-bg);
-    border-radius: var(--track-radius);
-  }
-  .custom-slider::-moz-range-track {
-    height: var(--track-h);
-    background: var(--track-bg);
-    border-radius: var(--track-radius);
-  }
-
-  /* 3. Style the Handle (Thumb) */
-  .custom-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    height: var(--thumb-size);
-    width: var(--thumb-size);
-    background: var(--thumb-bg);
-    border-radius: var(--thumb-radius);
-    margin-top: var(--thumb-offset);
-    box-shadow: var(--thumb-shadow);
-  }
-  .custom-slider::-moz-range-thumb {
-    height: var(--thumb-size);
-    width: var(--thumb-size);
-    background: var(--thumb-bg);
-    border-radius: var(--thumb-radius);
-    border: none;
-    box-shadow: var(--thumb-shadow);
-  }
-
-  /* 4. Active State (While Dragging) */
-  .custom-slider:active {
-    --thumb-shadow: 0 0 0 1px var(--color-black); /* Thicker outline for tactile feedback */
-  }
-
-  /* 5. Focus State (For Keyboard Accessibility) */
-  .custom-slider:focus-visible {
-    outline: 2px solid var(--color-dark-green);
-    outline-offset: 4px;
   }
 </style>

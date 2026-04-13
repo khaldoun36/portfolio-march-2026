@@ -1,5 +1,5 @@
 <template>
-  <main class="max-w-3xl">
+  <main class="max-w-[80ch]">
     <NuxtImg
       src="/assets/profile_picture.png"
       class="mb-fluid-element ds-border rounded-full size-16"
@@ -8,16 +8,13 @@
       alt="A portrait of me with a short beard wearing a traditional white thobe."
     />
 
-    <h1
-      class="mb-2.5 font-bold text-display-md md:text-display-lg xl:text-display-lg"
-    >
+    <h1 class="text-4xl font-semibold mb-3 md:text-6xl">
       Building apps, launching ideas, and chasing PRs.
     </h1>
-    <p class="mb-fluid-element max-w-[60ch] text-md md:text-lg text-pretty">
+    <p class="text-lg text-pretty mb-fluid-element md:text-xl">
       I’m Khaldoon — a software developer, entrepreneur, and amateur athlete.
-      Currently building <span class="inline-block px-1">Bites</span>, a
-      platform that turns weight loss into a shared journey by combining
-      tracking with social accountability.
+      Currently building Bites, a platform that turns weight loss into a shared
+      journey by combining tracking with social accountability.
     </p>
 
     <div class="flex items-center gap-4">

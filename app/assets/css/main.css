@@ -8,15 +8,15 @@
   /* 1. Wipe default Tailwind text scale */
   --text-*: initial;
 
-  /* 2. Untitled UI - Text Scale */
+  /* 2. Custom text scale using Tailwind-style names */
   --text-xs: 0.75rem; /* 12px */
   --text-xs--line-height: 1.125rem; /* 18px */
 
   --text-sm: 0.875rem; /* 14px */
   --text-sm--line-height: 1.25rem; /* 20px */
 
-  --text-md: 1rem; /* 16px */
-  --text-md--line-height: 1.5rem; /* 24px */
+  --text-base: 1rem; /* 16px */
+  --text-base--line-height: 1.5rem; /* 24px */
 
   --text-lg: 1.125rem; /* 18px */
   --text-lg--line-height: 1.75rem; /* 28px */
@@ -24,27 +24,29 @@
   --text-xl: 1.25rem; /* 20px */
   --text-xl--line-height: 1.875rem; /* 30px */
 
-  /* 3. Untitled UI - Display Scale */
-  --text-display-xs: 1.5rem; /* 24px */
-  --text-display-xs--line-height: 2rem; /* 32px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-2xl--line-height: 2rem; /* 32px */
 
-  --text-display-sm: 1.875rem; /* 30px */
-  --text-display-sm--line-height: 2.375rem; /* 38px */
+  --text-3xl: 1.875rem; /* 30px */
+  --text-3xl--line-height: 2.375rem; /* 38px */
 
-  --text-display-md: 2.25rem; /* 36px */
-  --text-display-md--line-height: 2.75rem; /* 44px */
+  --text-4xl: 2.25rem; /* 36px */
+  --text-4xl--line-height: 2.75rem; /* 44px */
 
-  --text-display-lg: 3rem; /* 48px */
-  --text-display-lg--line-height: 3.75rem; /* 60px */
+  --text-5xl: 2.5rem; /* 40px */
+  --text-5xl--line-height: 3rem; /* 48px */
 
-  --text-display-xl: 3.75rem; /* 60px */
-  --text-display-xl--line-height: 4.5rem; /* 72px */
+  --text-6xl: 3rem; /* 48px */
+  --text-6xl--line-height: 3.75rem; /* 60px */
 
-  --text-display-2xl: 4.5rem; /* 72px */
-  --text-display-2xl--line-height: 5.625rem; /* 90px */
+  --text-7xl: 3.75rem; /* 60px */
+  --text-7xl--line-height: 4.5rem; /* 72px */
 
-  --font-display: "CabinetGrotesk", sans-serif, ui-sans-serif;
-  --font-sans: "Montserrat", sans-serif, ui-sans-serif;
+  --text-8xl: 4.5rem; /* 72px */
+  --text-8xl--line-height: 5.625rem; /* 90px */
+
+  --font-display: "Oswald", ui-sans-serif, sans-serif;
+  --font-serif: "SourceSerif", ui-serif, serif;
 
   /* ****************** */
   /* ***** Colors ***** */
@@ -61,12 +63,12 @@
   /* ****************** */
   --spacing-fluid-section: clamp(4rem, 6.67vw + 1.87rem, 8rem);
   --spacing-fluid-inner: clamp(2rem, 3.33vw + 0.93rem, 4rem);
-  --spacing-fluid-element: clamp(1rem, 1.67vw + 0.47rem, 2rem);
+  --spacing-fluid-element: clamp(1.25rem, 1.25vw + 0.85rem, 2rem);
 }
 
 @layer base {
   body {
-    font-family: var(--font-sans);
+    font-family: var(--font-serif);
     color: var(--color-dark-green);
   }
 

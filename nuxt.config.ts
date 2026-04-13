@@ -12,13 +12,13 @@ export default defineNuxtConfig({
   fonts: {
     families: [
       {
-        name: "Montserrat",
-        src: "/fonts/Montserrat.woff2",
+        name: "Oswald",
+        src: "/fonts/Oswald.woff2",
         weight: "100 900",
       },
       {
-        name: "CabinetGrotesk",
-        src: "/fonts/CabinetGrotesk.woff2",
+        name: "SourceSerif",
+        src: "/fonts/SourceSerif.woff2",
         weight: "100 900",
       },
     ],
