@@ -1,6 +1,6 @@
 const imageReel = [
   {
-    src: "public/assets/image-reel/image-reel-1.jpg",
+    src: "/assets/image-reel/image-reel-1.jpg",
     alt: "A man in a green athletic shirt performing double-unders with a jump rope in a dimly lit gym.",
   },
   {
