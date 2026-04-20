@@ -5,6 +5,41 @@
   </div>
 </template>
 
+<script setup lang="ts">
+  const route = useRoute();
+  const siteUrl = "https://www.khaldoon.dev";
+
+  useSeoMeta({
+    titleTemplate: (titleChunk) => {
+      return titleChunk
+        ? `${titleChunk} - Khaldoon Alnuaimi`
+        : "Khaldoon Alnuaimi - Developer & Entrepreneur";
+    },
+    description:
+      "I’m Khaldoon — a software developer, entrepreneur, and amateur athlete. Building apps, launching ideas, and chasing PRs.",
+    ogType: "website",
+    ogTitle: "Khaldoon Alnuaimi - Developer & Entrepreneur",
+    ogDescription:
+      "I’m Khaldoon — a software developer, entrepreneur, and amateur athlete. Building apps, launching ideas, and chasing PRs.",
+    twitterCard: "summary",
+    twitterTitle: "Khaldoon Alnuaimi - Developer & Entrepreneur",
+    twitterDescription: "Building apps, launching ideas, and chasing PRs.",
+    author: "Khaldoon Alnuaimi",
+  });
+
+  useHead({
+    htmlAttrs: {
+      lang: "en", // Tells search engines and screen readers the site is in English
+    },
+    link: [
+      {
+        rel: "canonical",
+        href: () => `${siteUrl}${route.path}`,
+      },
+    ],
+  });
+</script>
+
 <style>
   body,
   #__nuxt {
