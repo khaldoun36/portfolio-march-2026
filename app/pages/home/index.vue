@@ -1,11 +1,13 @@
 <template>
   <HeroSection v-bind="$attrs" class="mb-fluid-inner" />
   <ImageCarousel :images="images" />
+  <RecentEnteries />
 </template>
 
 <script setup lang="ts">
   import HeroSection from "./components/HeroSection.vue";
   import ImageCarousel from "./components/ImageCarousel.vue";
+  import RecentEnteries from "./components/RecentEnteries.vue";
 
   defineOptions({ inheritAttrs: false });
 
