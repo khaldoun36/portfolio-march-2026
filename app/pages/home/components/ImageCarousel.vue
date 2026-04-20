@@ -11,6 +11,7 @@
             :alt="image.alt"
             :width="image.width ? image.width : '4096'"
             :height="image.height ? image.height : '4096'"
+            loading="lazy"
           />
         </div>
       </div>

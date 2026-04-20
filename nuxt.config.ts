@@ -21,8 +21,10 @@ export default defineNuxtConfig({
       ],
     },
   },
+
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
+
   modules: [
     "@nuxt/eslint",
     "@nuxt/fonts",
@@ -30,13 +32,16 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxt/content",
   ],
+
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: {
       exclude: ["@nuxtjs/mdc"],
     },
   },
+
   css: ["./app/assets/css/main.css"],
+
   fonts: {
     families: [
       {
@@ -50,5 +55,57 @@ export default defineNuxtConfig({
         weight: "100 900",
       },
     ],
+  },
+
+  image: {
+    // Matches Nuxt/Tailwind breakpoints
+    screens: {
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      "2xl": 1536,
+    },
+
+    quality: 80,
+
+    // Default format order for <NuxtPicture>
+    // AVIF first when supported, WebP fallback
+    format: ["avif", "webp"],
+
+    presets: {
+      content: {
+        modifiers: {
+          quality: 80,
+          fit: "cover",
+        },
+
+        // Matches your content column
+        // < 640px: viewport minus 2rem outer margins
+        // 640px–1279px: viewport minus 6rem total (2rem outer gutters + 1rem breakout each side)
+        // >= 1280px: capped content width
+        sizes:
+          "(max-width: 639px) calc(100vw - 2rem), (max-width: 1279px) calc(100vw - 6rem), 72rem",
+      },
+
+      full: {
+        modifiers: {
+          quality: 80,
+          fit: "cover",
+        },
+
+        // Full-width lane in your grid
+        sizes: "100vw",
+      },
+
+      contain: {
+        modifiers: {
+          quality: 80,
+          fit: "contain",
+        },
+        sizes:
+          "(max-width: 639px) calc(100vw - 2rem), (max-width: 1279px) calc(100vw - 6rem), 72rem",
+      },
+    },
   },
 });
