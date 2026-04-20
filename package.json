@@ -10,13 +10,16 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/content": "^3.13.0",
     "@nuxt/eslint": "1.15.2",
     "@nuxt/fonts": "0.14.0",
     "@nuxt/icon": "2.2.1",
     "@nuxt/image": "2.0.0",
     "@tailwindcss/vite": "^4.2.2",
+    "better-sqlite3": "^12.9.0",
     "embla-carousel-vue": "^8.6.0",
     "nuxt": "^4.4.2",
+    "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.2.2",
     "vue": "^3.5.30",
     "vue-router": "^5.0.4"

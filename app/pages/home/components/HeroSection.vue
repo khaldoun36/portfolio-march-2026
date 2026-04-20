@@ -1,5 +1,5 @@
 <template>
-  <main class="max-w-[80ch]">
+  <main class="max-w-[85ch]">
     <NuxtImg
       src="/assets/profile_picture.png"
       class="mb-fluid-element ds-border rounded-full size-16"
@@ -8,7 +8,7 @@
       alt="A portrait of me with a short beard wearing a traditional white thobe."
     />
 
-    <h1 class="text-4xl font-semibold mb-3 md:text-6xl">
+    <h1 class="text-4xl font-semibold mb-3 md:text-6xl text-pretty">
       Building apps, launching ideas, and chasing PRs.
     </h1>
     <p class="text-lg text-pretty mb-fluid-element md:text-xl">

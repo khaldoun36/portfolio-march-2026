@@ -34,7 +34,6 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, onMounted, onBeforeUnmount } from "vue";
   import useEmblaCarousel from "embla-carousel-vue";
   import IconButton from "~/components/IconButton.vue";
 

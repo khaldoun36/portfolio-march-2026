@@ -1,7 +1,7 @@
 <template>
   <div class="content-grid">
     <NuxtRouteAnnouncer />
-    <NuxtPage />
+    <NuxtPage class="pt-fluid-section" />
   </div>
 </template>
 
@@ -12,7 +12,7 @@
   }
 
   .content-grid {
-    --content-max: 68rem;
+    --content-max: 72rem;
     --page-margin: 1rem;
     --breakout: 0rem;
 
